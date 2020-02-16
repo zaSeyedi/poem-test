@@ -1,13 +1,158 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.border {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #7B888E;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 10%;
+  background-color: #F5F5F5;
+  border: 1px #607D8B;
+}
+
+.circle {
+  margin-left: 10px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 1px rgb(12, 7, 7);
+  background: #6F6F6F;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.dots {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dot {
+  margin-right: 10px;
+  margin-bottom: 2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px rgb(12, 7, 7);
+  background: #6F6F6F;
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  direction: rtl;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 8%;
+}
+
+.poetContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.poetB {
+  font-size: 15px;
+  margin-right: 10px;
+  margin-left: 5px;
+  padding: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 20px;
+  text-align: center;
+  border: 1px rgb(12, 7, 7);
+  background: #F5F5F5;
+}
+
+.bookB {
+  font-size: 15px;
+  padding: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 20px;
+  text-align: center;
+  border: 1px rgb(12, 7, 7);
+  background: #F5F5F5;
+}
+
+.icon {
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+  border: 1px rgb(12, 7, 7);
+  background: #6F6F6F;
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+  direction: rtl;
+  justify-content: space-between;
+  height: 70%;
+}
+
+.poems {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 80%;
+  align-items: flex-start;
+    padding: 10px;
+}
+
+.icons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 40px;
+}
+
+.icosContent {
+  margin-left: 15px;
+  width: 10px;
+  height: 20px;
+  border: 1px rgb(12, 7, 7);
+  background: #F5F5F5
+}
+.icosContent2 {
+  margin-left: 15px;
+  margin-bottom: 45px;
+  width: 10px;
+  height: 20px;
+  border: 1px rgb(12, 7, 7);
+  background: rgb(201, 198, 198);
+}
+.footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
+  border: 2px #607D8B !important;
+  background: #F5F5F5
 }
