@@ -7,36 +7,47 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      poemList: []
+      poemList: null
     };
   }
-  UNSAFE_componentWillMount() {
+  async UNSAFE_componentWillMount() {
     //why unsafe?
 
-    this.setState({ poemList: getPoem() })
+    let result  =  await getPoem()
+    this.setState({poemList : result})
+    console.log(this.state.poemList.length)
 
   }
   render() {
-    return (
-      <div className="App">
-        <this.Border
-          title={this.state.poemList.title}
 
-          test={
-            this.state.poemList.hemistichs
-            // ["می‌خواهمت چنان که شب خسته خواب را",
-            //   "می‌جویمت چنان‌که لب تشنه آب را",
-            //   "محو توام چنان‌که ستاره به چشم صبح",
-            //   "یا شبنم سپیده‌دمان آفتاب را",
-            //   "بی‌تابم آن‌چنان که درختان برای باد",
-            //   "یا کودکان خفته به گهواره، خواب را",
-            //   "ای خواهشی که خواستنی‌تر ز پاسخی",
-            //   "با چون تو پرسشی چه نیازی جواب را"]
-          }
-          icon={["icon", "icon", "icon", "icon", "icon"]} />
+    if (this.state.poemList !== null ) {
+      return (
+        <div className="App">
+          <this.Border
+            title={this.state.poemList.title}
 
-      </div>
-    );
+            test={
+              this.state.poemList.hemistichs
+              // ["می‌خواهمت چنان که شب خسته خواب را",
+              //   "می‌جویمت چنان‌که لب تشنه آب را",
+              //   "محو توام چنان‌که ستاره به چشم صبح",
+              //   "یا شبنم سپیده‌دمان آفتاب را",
+              //   "بی‌تابم آن‌چنان که درختان برای باد",
+              //   "یا کودکان خفته به گهواره، خواب را",
+              //   "ای خواهشی که خواستنی‌تر ز پاسخی",
+              //   "با چون تو پرسشی چه نیازی جواب را"]
+            }
+            icon={["icon", "icon", "icon", "icon", "icon"]} />
+
+        </div>
+      );
+    }
+    else {
+      return (
+        <div className="loader"></div>
+      )
+    }
+
   }
   Border = (props) => {
     return (
