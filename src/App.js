@@ -13,14 +13,14 @@ export default class App extends React.Component {
   async UNSAFE_componentWillMount() {
     //why unsafe?
 
-    let result  =  await getPoem()
-    this.setState({poemList : result})
+    let result = await getPoem()
+    this.setState({ poemList: result })
     console.log(this.state.poemList.length)
 
   }
   render() {
 
-    if (this.state.poemList !== null ) {
+    if (this.state.poemList !== null) {
       return (
         <div className="App">
           <this.Border
@@ -44,7 +44,9 @@ export default class App extends React.Component {
     }
     else {
       return (
-        <div className="loader"></div>
+        <div className="load">
+          <div className="loader"></div>
+        </div>
       )
     }
 
