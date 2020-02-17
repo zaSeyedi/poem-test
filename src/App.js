@@ -2,6 +2,10 @@ import React from 'react';
 import './App.css';
 import './index.css';
 import { getPoem } from './fakePoemServic'
+import { ChevronLeft } from './ChevronLeft'
+import { Bookmark , Bookmark2 } from './Bookmark'
+import { Search } from './Search'
+import { Message } from './Message'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -66,13 +70,17 @@ export default class App extends React.Component {
   Header = ({ title }) => {
     return (
       <div className="header">
-        <div className="circle"></div>
+        <ChevronLeft />
         <div className="title">{title}</div>
-        <div className="dots">
-          <div className="dot"></div>
-          <div className="dot"></div>
-          <div className="dot"></div>
+        <div className="searchAndDots">
+          <Search />
+          <div className="dots">
+            <div className="dot"></div>
+            <div className="dot"></div>
+            <div className="dot"></div>
+          </div>
         </div>
+
       </div>
     )
 
@@ -84,6 +92,7 @@ export default class App extends React.Component {
           <this.PoetB poetB={this.state.poemList.poets[0].name} />
           <this.BookB bookB={this.state.poemList.book.name} />
         </div>
+
         <div className="icon"></div>
       </div>
     )
@@ -123,8 +132,8 @@ export default class App extends React.Component {
           }
         </div>
         <div className="icons">
-          <div className="icosContent"></div>
-          <div className="icosContent2"></div>
+          <Bookmark className="icosContent" />
+          <Bookmark className="icosContent2" />
         </div>
       </div>
     )
@@ -133,13 +142,10 @@ export default class App extends React.Component {
 
     return (
       <div className="footer">
-        {
-          icon.map(item => {
-            return (
-              <div className={item}></div>
-            )
-          })
-        }
+        
+          <Message />
+          <Bookmark2/>
+        
         {/* <div className ="icon"></div>
           <div className ="icon"></div>
           <div className ="icon"></div>

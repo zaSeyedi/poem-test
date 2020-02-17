@@ -47,6 +47,7 @@ code {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-left: 10px;
 }
 
 .dot {
@@ -106,7 +107,11 @@ code {
   border: 1px rgb(12, 7, 7);
   background: #6F6F6F;
 }
-
+.searchAndDots{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 .body {
   display: flex;
   flex-direction: row;
@@ -133,18 +138,12 @@ code {
 
 .icosContent {
   margin-left: 15px;
-  width: 10px;
-  height: 20px;
-  border: 1px rgb(12, 7, 7);
-  background: #F5F5F5
+ 
 }
 .icosContent2 {
   margin-left: 15px;
   margin-bottom: 45px;
-  width: 10px;
-  height: 20px;
-  border: 1px rgb(12, 7, 7);
-  background: rgb(201, 198, 198);
+ 
 }
 .footer{
   display: flex;
