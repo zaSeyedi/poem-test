@@ -3,29 +3,95 @@ import './App.css';
 import './index.css';
 import { getPoem } from './fakePoemServic'
 import { ChevronLeft } from './ChevronLeft'
-import { Bookmark , Bookmark2 } from './Bookmark'
+import { Bookmark, Bookmark2 } from './Bookmark'
 import { Search } from './Search'
+import axios from 'axios'
 import { Message } from './Message'
 
+
+
+let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjA4OGI3OTg2M2E2NGRkMDUyMWQ1YSIsInVzZXJuYW1lIjoibm9yZWFkby01ZGIwODhiNzk4NjNhNjRkZDA1MjFkNTkiLCJyb2xlcyI6WyJ1c2VyIl0sInJlZnJlc2hUb2tlbklkSGFzaCI6ImYzYTM2MmJiLTJiODUtNDljNy1hOTMwLTQ0N2I4OGMzY2EzYiIsImlhdCI6MTU3NzI2MDIxMywiZXhwIjoxNTgxNDI5NDc0MTU2fQ.avGI47CHLK6XRi1-BbVDOZXhhrKdaGuie0lK-niYOyg';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      poemList: null
+      poemList: [],
+      is_loading: true
     };
   }
-  async UNSAFE_componentWillMount() {
-    //why unsafe?
+  // async UNSAFE_componentWillMount() {
+  //   //why unsafe?
 
-    let result = await getPoem()
-    this.setState({ poemList: result })
-    console.log(this.state.poemList.length)
+  //   let result = await getPoem()
+  //   this.setState({ poemList: result })
+  //   console.log(this.state.poemList.length)
 
+  // }
+  /*
+    async UNSAFE_componentDidlMount() {
+      //   //why unsafe?
+      //   axios({
+      //     method:'GET',
+      //     url: 'http://185.120.220.213/api/v1/poem/5cffd9b7e38eaf7a54c59c43',
+      //     headers: {
+  
+      //       //Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjA4OGI3OTg2M2E2NGRkMDUyMWQ1YSIsInVzZXJuYW1lIjoibm9yZWFkby01ZGIwODhiNzk4NjNhNjRkZDA1MjFkNTkiLCJyb2xlcyI6WyJ1c2VyIl0sInJlZnJlc2hUb2tlbklkSGFzaCI6ImYzYTM2MmJiLTJiODUtNDljNy1hOTMwLTQ0N2I4OGMzY2EzYiIsImlhdCI6MTU3NzI2MDIxMywiZXhwIjoxNTgxNDI5NDc0MTU2fQ.avGI47CHLK6XRi1-BbVDOZXhhrKdaGuie0lK-niYOyg'
+      //     }
+  
+      //   })
+      let array = []
+      let data = await fetch('http://185.120.220.213/api/v1/poem/5cffd9b7e38eaf7a54c59c43', {
+        method: 'GET',
+        headers: {
+          "Authorization": 'Bearer ' + token
+        }
+      })
+      console.log(await data.json());
+      this.setState({ is_loading: false });
+      for (let i = 0; i < data.length; i++) {
+        array.push( data.item[i])
+      }
+      console.log( array)
+      this.setState({ poemList: array });
+  
+  
+      // .then(function (response) {
+      //   this.setState({ is_loading: false })
+      //   this.setState({ poemList: response.data });
+      //   console.log(response.status);
+      // })
+      // .catch(function (ex) {
+      //   this.setState({ is_loading: false })
+      //   console.log(ex);
+      // })
+    }
+    */
+  UNSAFE_componentWillMount() {
+
+    fetch('http://185.120.220.213/api/v1/poem/5cffd9b7e38eaf7a54c59c43', {
+      method: 'GET',
+      headers: {
+        "Authorization": 'Bearer ' + token
+      }
+    })
+      .then(response => response.json())
+      .then(result => {
+        this.setState({ poemList: result, is_loading: false })
+      })
+      .catch(e => {
+        console.log(e);
+        this.setState({ ...this.state, is_loading: true });
+      });
+      //console.log( data);
   }
   render() {
-
-    if (this.state.poemList !== null) {
-      return (
+    console.log(this.state.is_loading);
+    console.log(this.state.poemList)
+    let view = <div className="load">
+      <div className="loader"></div>
+    </div>;
+    if (this.state.is_loading === false) {
+      view=(
         <div className="App">
           <this.Border
             title={this.state.poemList.title}
@@ -46,13 +112,7 @@ export default class App extends React.Component {
         </div>
       );
     }
-    else {
-      return (
-        <div className="load">
-          <div className="loader"></div>
-        </div>
-      )
-    }
+    return view;
 
   }
   Border = (props) => {
@@ -142,10 +202,10 @@ export default class App extends React.Component {
 
     return (
       <div className="footer">
-        
-          <Message />
-          <Bookmark2/>
-        
+
+        <Message />
+        <Bookmark2 />
+
         {/* <div className ="icon"></div>
           <div className ="icon"></div>
           <div className ="icon"></div>
