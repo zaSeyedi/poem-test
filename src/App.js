@@ -2,13 +2,12 @@ import React from 'react';
 import './App.css';
 import './index.css';
 import { getPoem } from './fakePoemServic'
-import { ChevronLeft } from './ChevronLeft'
-import { Bookmark, Bookmark2 } from './Bookmark'
-import { Search } from './Search'
 import axios from 'axios'
-import { Message } from './Message'
-
-
+import {
+  KeyboardArrowLeft, Bookmark, BookmarkBorder,
+  Share, Fullscreen, Search, ChatBubbleOutline, Bookmarks, Chat, MoreVert, Book
+} from '@material-ui/icons';
+import poet from "./assets/poet.jfif"
 
 let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjA4OGI3OTg2M2E2NGRkMDUyMWQ1YSIsInVzZXJuYW1lIjoibm9yZWFkby01ZGIwODhiNzk4NjNhNjRkZDA1MjFkNTkiLCJyb2xlcyI6WyJ1c2VyIl0sInJlZnJlc2hUb2tlbklkSGFzaCI6ImYzYTM2MmJiLTJiODUtNDljNy1hOTMwLTQ0N2I4OGMzY2EzYiIsImlhdCI6MTU3NzI2MDIxMywiZXhwIjoxNTgxNDI5NDc0MTU2fQ.avGI47CHLK6XRi1-BbVDOZXhhrKdaGuie0lK-niYOyg';
 export default class App extends React.Component {
@@ -19,11 +18,13 @@ export default class App extends React.Component {
       is_loading: true
     };
   }
+  //read data from fake api
   // async UNSAFE_componentWillMount() {
   //   //why unsafe?
 
   //   let result = await getPoem()
   //   this.setState({ poemList: result })
+  //   this.setState({is_loading:false})
   //   console.log(this.state.poemList.length)
 
   // }
@@ -66,24 +67,28 @@ export default class App extends React.Component {
       // })
     }
     */
-  UNSAFE_componentWillMount() {
 
-    fetch('http://185.120.220.213/api/v1/poem/5cffd9b7e38eaf7a54c59c43', {
-      method: 'GET',
-      headers: {
-        "Authorization": 'Bearer ' + token
-      }
+  //read data from server
+  
+UNSAFE_componentWillMount() {
+
+  fetch('http://185.120.220.213/api/v1/poem/5cffd9b7e38eaf7a54c59c43', {
+    method: 'GET',
+    headers: {
+      "Authorization": 'Bearer ' + token
+    }
+  })
+    .then(response => response.json())
+    .then(result => {
+      this.setState({ poemList: result, is_loading: false })
     })
-      .then(response => response.json())
-      .then(result => {
-        this.setState({ poemList: result, is_loading: false })
-      })
-      .catch(e => {
-        console.log(e);
-        this.setState({ ...this.state, is_loading: true });
-      });
-      //console.log( data);
-  }
+    .catch(e => {
+      console.log(e);
+      this.setState({ ...this.state, is_loading: true });
+    });
+  //console.log( data);
+}
+
   render() {
     console.log(this.state.is_loading);
     console.log(this.state.poemList)
@@ -91,7 +96,7 @@ export default class App extends React.Component {
       <div className="loader"></div>
     </div>;
     if (this.state.is_loading === false) {
-      view=(
+      view = (
         <div className="App">
           <this.Border
             title={this.state.poemList.title}
@@ -130,15 +135,11 @@ export default class App extends React.Component {
   Header = ({ title }) => {
     return (
       <div className="header">
-        <ChevronLeft />
+        <KeyboardArrowLeft />
         <div className="title">{title}</div>
         <div className="searchAndDots">
           <Search />
-          <div className="dots">
-            <div className="dot"></div>
-            <div className="dot"></div>
-            <div className="dot"></div>
-          </div>
+          <MoreVert />
         </div>
 
       </div>
@@ -153,18 +154,29 @@ export default class App extends React.Component {
           <this.BookB bookB={this.state.poemList.book.name} />
         </div>
 
-        <div className="icon"></div>
+        <Fullscreen className="icon"></Fullscreen>
       </div>
     )
   }
   PoetB = ({ poetB }) => {
     return (
-      <div className="poetB">{poetB}</div>
+      <div className="poetB">
+        <img src={poet} className="pic" />
+        <div style={{ fontSize: 15, paddingBottom: 3, paddingRight: 3 }}>
+          {poetB}
+        </div>
+      </div >
     )
   }
   BookB = ({ bookB }) => {
     return (
-      <div className="bookB">{bookB}</div>
+      <div className="bookB">
+        <Book style={{ fontSize: 16 }}></Book>
+        <div style={{ fontSize: 15 }}>
+          {bookB}
+        </div>
+      </div>
+
     )
   }
   Body = ({ test }) => {
@@ -183,7 +195,7 @@ export default class App extends React.Component {
           {
             temp.map(item => {
               return (
-                <div>
+                <div className="vers">
                   <div>{item.text[0]}</div>
                   <div>{item.text[1]}</div>
                 </div>
@@ -203,8 +215,11 @@ export default class App extends React.Component {
     return (
       <div className="footer">
 
-        <Message />
-        <Bookmark2 />
+        <ChatBubbleOutline />
+        <Chat />
+        <BookmarkBorder />
+        <Share />
+        <Bookmarks className="bookMarks" />
 
         {/* <div className ="icon"></div>
           <div className ="icon"></div>
